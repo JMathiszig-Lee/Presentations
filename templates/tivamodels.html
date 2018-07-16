@@ -1,0 +1,141 @@
+<html>
+	<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reveal.css') }}">
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/theme/moon.css') }}">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+          <h3>TIVA models</h3>
+          <br>
+          <h6>As easy as</h6>
+          <p>
+
+            <br>
+            <i>A</i>e<sup>-&alpha;t</sup> + <i>B</i>e<sup>-&beta;t</sup> + <i>C</i>e<sup>-&theta;t</sup>
+          </p>
+        </section>
+				<section>
+          <section>
+            <h3>Basics</h3>
+            <br>
+            <h6>for a bolus:</h6>
+            <br>
+            <p>Cp = Dose / Vd </p>
+          </section>
+          <section>
+            <h6>infusion</h6>
+            <br>
+            <p>Cp = rate / Cl </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Propofol</h2>
+            <br>
+            <p>3 Compartments....</p>
+            <br>
+            <p align="left">
+              <b>Central (V1):</b>
+              <span class="fragment visible" data-fragment-index="1">Intravascular</span>
+              <br>
+              <br>
+              <b>Fast (V2):</b>
+              <span class="fragment visible" data-fragment-index="2">Well perfused tissue</span>
+              <span class="fragment visible" data-fragment-index="3"> <i>e.g. muscle</i></span>
+              <br>
+              <br>
+              <b>Slow (V3):</b>
+              <span class="fragment visible" data-fragment-index="4">Poorly perfused</span>
+              <span class="fragment visible" data-fragment-index="5"> <i>e.g. fat</i></span>
+              <br>
+              <br>
+            </p>
+          </section>
+          <section>
+            <h2>Rate constants</h2>
+            <svg width="550" height="250">
+              <rect x="0" y="20" rx="20" ry="20" width="150" height="150" style="fill:orange;stroke:black;stroke-width:3;opacity:0.5" />
+              <rect x="200" y="20" rx="20" ry="20" width="150" height="150" style="fill:yellow;stroke:black;stroke-width:3;opacity:0.5" />
+              <rect x="400" y="20" rx="20" ry="20" width="150" height="150" style="fill:orange;stroke:black;stroke-width:3;opacity:0.5" />
+              <rect x="150" y="120" width="50" height="20" style="fill:blue;stroke:black;stroke-width:3;opacity:0.5" />
+              <rect x="350" y="120" width="50" height="20" style="fill:red;stroke:black;stroke-width:3;opacity:0.5" />
+              <rect x="265" y="170" width="20" height="50" style="fill:green;stroke:black;stroke-width:3;opacity:0.5" />
+            </svg>
+            <p align="left">
+              Between: <br>
+                <span class="fragment highlight-blue visible" data-fragment-index="1">- V1 and V2</span><br>
+                <span class="fragment highlight-red visible" data-fragment-index="2">- V1 and V3</span><br>
+                <span class="fragment highlight-green visible" data-fragment-index="3">- Clearance from V1</span>
+            </p>
+          </section>
+        </section>
+        <section>
+          <h2>A chart!</h2>
+          <br>
+          <div id="chart"></div>
+          <br>
+        </section>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='js/reveal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/c3.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+		<script>
+			Reveal.initialize();
+      var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+          xs: {
+            'Bolus': 'time',
+            'Infusion': 'time2',
+          },
+          columns: [
+            ['time', 0, 2.11, 4.01, 8.06, 16.03, 30.05, 59.73, ],
+            ['Bolus', 0, 3.62, 1.33, 0.676, 0.338, 0.204, 0.11, ],
+            ['Infusion', 0, 0.322, 0.632, 0.561, 0.606, 0.748, 0.812, 0.373, 0.291, 0.23, 0.184, 0.16, 0.111,],
+            ['time2', 0, 2, 3.96, 7.99, 16.18, 30.02, 59.68, 62.03, 64.11, 68.06, 76, 90.03, 120, ]
+          ],
+          type: 'area-spline',
+        },
+        axis: {
+          x: {
+            padding: {
+              right: 10,
+            },
+            tick: {
+            culling: {
+                max: 4 // the number of tick texts will be adjusted to less than this value
+            }
+
+            // for normal axis, default on
+            // for category axis, default off
+            },
+            label: {
+              text: 'time (mins)',
+              position:'outer-center',
+            },
+          },
+          y: {
+            padding: {
+              left: 40,
+            },
+            tick: {
+              culling: {
+                max: 3 // the number of tick texts will be adjusted to less than this value
+            }
+            // for normal axis, default on
+            // for category axis, default off
+          },
+            label: {
+              text: 'Plasma Concentration',
+              position:'outer-middle',
+            },
+          }
+        }
+      });
+		</script>
+	</body>
+</html>
