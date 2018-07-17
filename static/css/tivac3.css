@@ -1,11 +1,11 @@
 .c3-event-rects{
-    fill-opacity: 1!important;
+    fill-opacity: 0.4!important;
+    fill: #fff;
 }
 .c3-event-rect{
-    fill:#ccc;
-    opacity: 0;
+    fill: blue;
 }
 
 .c3-area{
-  fill: #ffffff;
+  fill: none;
 }
