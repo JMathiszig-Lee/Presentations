@@ -12,7 +12,6 @@
           <br>
           <h6>As easy as</h6>
           <p>
-
             <br>
             <i>A</i>e<sup>-&alpha;t</sup> + <i>B</i>e<sup>-&beta;t</sup> + <i>C</i>e<sup>-&theta;t</sup>
           </p>
@@ -101,7 +100,7 @@
 					<br>
 					<p>
 						Do your patients look like this?
-					<div id="chart2" style="fill:#93a1a1;fill-opactity:0.2;font-size:20px;"><p>test</p></div>
+					<div id="chart2" style="fill:#93a1a1;fill-opactity:0.2;font-size:20px;"></div>
 					<br>
 				</p>
 				</section>
@@ -134,8 +133,26 @@
 						</table>
 					</section>
 					<section>
-						
+						<h2>Some examples</h2>
+						Age: <input type='number' value="40" name="age">
+						Weight: <input type='number' value="70" name="weight">
+						Height: <input type='number' value="170" name="height">
+						<div id="chart3" style="fill:#93a1a1;fill-opactity:0.2;font-size:20px;"></div>
 					</section>
+				</section>
+				<section>
+						<h2>The James equation</h2>
+						<h6>achilles heel of schnider?</h6>
+						<p>Equation for lean body mass</p>
+						<p>Paradoxical decrease with high weights
+						<br>&#8756; increase in k10</p>
+				</section>
+				<section>
+						<h2>Result?</h2>
+						<img src="{{ url_for('static', filename='img/james.jpg') }}" />
+				</section>
+				<section>
+					<h2>The Future?</h2>
 				</section>
 			</div>
 		</div>
@@ -246,6 +263,10 @@
 				}
 			});
 			chart2.toggle(['BMI25', 'BMI30']);
+
+			var chart2 = c3.generate({
+				bindto: '#chart2',
+			});
 		</script>
 	</body>
 </html>
