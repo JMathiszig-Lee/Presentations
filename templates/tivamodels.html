@@ -2,7 +2,7 @@
 	<head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reveal.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/theme/moon.css') }}">
-		<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/tivac3.css') }}"> -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/tivac3.css') }}">
 	</head>
 	<body>
 		<div class="reveal">
@@ -34,7 +34,7 @@
 					<h2>How it looks</h2>
 					<p>plasma concetration after a bolus</p>
 					<br>
-					<div id="chart" style="fill:#93a1a1;font-size:20px;"></div>
+					<div id="chart" style="fill:none;font-size:20px;"></div>
 					<br>
 				</section>
         <section>
@@ -81,7 +81,8 @@
 						<h2>The fourth compartment</h2>
 						<br>
 						<p>Propofol doesn't work intravascularly</p>
-						<img src="{{ url_for('static', filename='img/effect.png') }}" />
+						<!-- <img src="{{ url_for('static', filename='img/effect.png') }}" /> -->
+						<div id="chart4" style="fill:none;font-size:20px;"></div>
 					</section>
 					<section>
 						<h2>Practicalities of Effect site targeting</h2>
@@ -112,7 +113,7 @@
 					<br>
 					<p>
 						Do your patients look like this?
-					<div id="chart2" style="fill:#93a1a1;fill-opactity:0.2;font-size:20px;"></div>
+					<div id="chart2" style="fill:none;font-size:20px;"></div>
 					<br>
 				</p>
 				</section>
@@ -180,23 +181,15 @@
           // xs: {
           //   'Calc': 'time',
 					// 	'CP': 'time',
-          //   'Effect site': 'time2',
           // },
 					x: 'time',
           columns: [
             ['time', 0, 2.11, 4.01, 8.06, 16.03, 30.05, 59.73, ],
-						['Calc', 0, 3.95,	1.33,	0.684,	0.526,	0.352,	0.17],
-            ['CP', 0, 3.62, 1.33, 0.676, 0.338, 0.204, 0.11, ],
-					//	['time2', 0, 2,	4,	6,	8,	10,	20,	30,	40,	50,	60,],
-          	//['Effect site', 0,	1.71,	2.37,	2.67,	1.62,	2.13,	4.11,	5.05,	5.18,	4.47,	4.29, ]
-
+						['Calculated Cp', 0, 3.95,	1.33,	0.684,	0.526,	0.352,	0.17],
+            ['Measured Cp', 0, 3.62, 1.33, 0.676, 0.338, 0.204, 0.11, ]
           ],
-          type: 'area-spline',
+          type: 'spline',
         },
-				area: {
-					opacity: 50,
-					color: '#ffffff',
-				},
         axis: {
           x: {
             padding: {
@@ -263,16 +256,24 @@
 						tick: {
 						culling: {
 								max: 5 // the number of tick texts will be adjusted to less than this value
-						}
-
-						// for normal axis, default on
-						// for category axis, default off
+							}
 						},
 						label: {
 							text: 'Weight (Kg)',
 							position:'outer-right',
 						},
 					},
+					y: {
+						tick: {
+							culling: {
+								max: 5
+						}
+					},
+						label: {
+							text: 'Height (cm)',
+							position:'inner-right',
+						},
+					}
 				}
 			});
 			chart2.toggle(['BMI25', 'BMI30']);
@@ -298,6 +299,48 @@
 				zoom: {
 					enabled: true
 				},
+			});
+
+			var chart4 = c3.generate({
+				bindto: '#chart4',
+				data: {
+					x: 'time',
+					columns: [
+						['time', 0, 10,	20,	30,	40,	50,	60,	70,	80,	90,	100, 110, 120, 150,	180,	210,	240,	270,	300,	330,	360,	390,	420,	450,	480,	510,	540,	570,	600,	630],
+						['CP', 20.78,	18.01,	15.63,	13.57,	11.80,	10.27,	8.96,	7.82,	6.85,	6.01,	5.28,	4.65,	4.11, 2.90,	2.12,	1.62,	1.29,	1.08,	0.94,	0.85,	0.78,	0.74,	0.71,	0.68,	0.66,	0.65,	0.63,	0.62,	0.61,	0.60],
+						['Ce', 0.16,	1.58,	2.70,	3.58,	4.26,	4.76,	5.12,	5.36,	5.51,	5.58,	5.58,	5.54,	5.46, 5.05,	4.52,	3.97,	3.46,	2.99,	2.58,	2.24,	1.94,	1.70,	1.50,	1.34,	1.20,	1.09,	1.00,	0.92,	0.86,	0.81]
+					],
+					type: 'spline',
+				},
+				axis: {
+					x: {
+						padding: {
+							right: 10,
+						},
+						tick: {
+						culling: {
+								max: 10 // the number of tick texts will be adjusted to less than this value
+							},
+						},
+						label: {
+							text: 'time (s)',
+							position:'inner-right',
+						},
+					},
+					y: {
+						tick: {
+							culling: {
+								max: 5 // the number of tick texts will be adjusted to less than this value
+						}
+						// for normal axis, default on
+						// for category axis, default off
+					},
+						label: {
+							text: 'Plasma Concentration',
+							position:'outer-middle',
+						},
+					}
+				}
 			});
 		</script>
 	</body>

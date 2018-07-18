@@ -1,11 +1,14 @@
 .c3-event-rects{
-    fill-opacity: 0.4!important;
-    
+    fill:none;
 }
 .c3-event-rect{
-
+  fill:none;
 }
 
-.c3-area{
-  fill: none;
+.c3-legend-item{
+  fill: #696969;
+}
+
+.c3-axis {
+  fill: #696969;
 }
