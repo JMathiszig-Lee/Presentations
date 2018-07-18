@@ -77,13 +77,25 @@
                 <span class="fragment highlight-green visible" data-fragment-index="3">- Clearance from V1</span>
             </p>
           </section>
+					<section>
+						<h2>The fourth compartment</h2>
+						<br>
+						<p>Propofol doesn't work intravascularly</p>
+						<img src="{{ url_for('static', filename='img/effect.png') }}" />
+					</section>
+					<section>
+						<h2>Practicalities of Effect site targeting</h2>
+						<br>
+						<p>
+							<ul>
+								<li>Lag time between Central and effect compartment</li>
+								<li>Significant plasma overshoot</li>
+								<li>overshoot varies with clearance</li>
+							</ul>
+						</p>
+						<img src="{{ url_for('static', filename='img/effect.png') }}" />
+					</section>
         </section>
-				<section>
-					<h2>The fourth compartment</h2>
-					<br>
-					<p>Propofol doesn't work intravascularly</p>
-					<img src="{{ url_for('static', filename='img/effect.png') }}" />
-				</section>
 				<section>
 					<h2>The Models</h2>
 					<br>
@@ -108,7 +120,7 @@
 					<section>
 						<h2>Differences</h2>
 						<br>
-						<table style="font-size:20px;">
+						<table style="font-size:20px;color:#d33682;">
 							<tr>
 								<th>Model</th>
 								<th>V1</th>
@@ -125,10 +137,10 @@
 							</tr>
 							<tr>
 								<td>Schnider</td>
-								<td class="fragment highlight-red visible" data-fragment-index="1">4.27</td>
+								<td class="fragment highlight-green visible" data-fragment-index="1">4.27</td>
 								<td>18.9-0.391x(age-53)</td>
 								<td>238</td>
-								<td>0.443+0.0107×(weight−77)−0.0159×(<span class="fragment highlight-red" data-fragment-index="2">LBM</span>−59)+0.0062×(height−177)</td>
+								<td>0.443+0.0107×(weight−77)−0.0159×(<span class="fragment highlight-green" data-fragment-index="2">LBM</span>−59)+0.0062×(height−177)</td>
 							</tr>
 						</table>
 					</section>
@@ -264,8 +276,8 @@
 			});
 			chart2.toggle(['BMI25', 'BMI30']);
 
-			var chart2 = c3.generate({
-				bindto: '#chart2',
+			var chart3 = c3.generate({
+				bindto: '#chart3',
 			});
 		</script>
 	</body>
